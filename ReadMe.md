@@ -3,7 +3,7 @@ Before you can start interacting with ChatGPT, you'll need to authenticate and a
 
 Get an API key from OpenAI by signing up for an account and creating a new Secret Key in the [API Keys](https://beta.openai.com/account/api-keys) section of the OpenAI dashboard.
 
-Then store it in a the [Secret Manager](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows):
+Then store it in the [Secret Manager](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-5.0&tabs=windows):
 
 1. Open a terminal window and navigate to the root directory of the project.
 
@@ -23,12 +23,12 @@ dotnet user-secrets list
 ```
 
 # Authenticating and configuring a Discord Bot
-First off you'll need a discord account, [sign up for one here](https://discord.com/) if you need to.
+You'll need a Discord account, [sign up for one here](https://discord.com/) if you need to.
 You can use Discord in the browser, or you can download the desktop application.
 
 1. Firstly, in Discord, add a new Server with the plus [+] icon in the side bar.
 
-2. Then go to [the developer portal](https://discord.com/developers/applications).
+2. Then go to the [Developer Portal](https://discord.com/developers/applications).
 
 3. Create a new App and make a note of the Application ID and Public Key.
 
@@ -65,9 +65,9 @@ dotnet user-secrets set "discord:bot-token" "YOUR BOT TOKEN"
 
 
 
-# Sending requests to the ChatGPT APIs for text generation
+# Sending requests to the ChatGPT API for text generation
 
-To generate text using the ChatGPT APIs, you will need to send an API request which uses the `text-davinci-003` model. We'll do this by requesting a _completion_, which sends a prompt to ChatGTP and receives a response in return.
+To generate text using the ChatGPT API, you will need to send an API request which uses the `text-davinci-003` model. We'll do this by requesting a _completion_, which sends a prompt to ChatGPT and receives a response in return.
 
 
 ## Payload
@@ -101,11 +101,11 @@ There are various different parameters you can experiment with, a full list of t
 
 ### Controlling the quality level using `best_of`
 
-The `BestOf` parameter instructs the AI to generate multiple responses for a given prompt, and return the one with the highest log probability per token. This means that the model will generate multiple responses to the same prompt and the one with the highest probability of being a good response is returned.
+The `best_of` parameter instructs the AI to generate multiple responses for a given prompt, and return the one with the highest log probability per token. This means that the model will generate multiple responses to the same prompt and the one with the highest probability of being a good response is returned.
 
 One of the main use cases of this parameter is in creative tasks such as brainstorming, content creation or any other task that requires generating multiple options. The "bestof" parameter can be set to a high value, which will generate a large number of different completions, increasing the chances of coming up with something truly unique and innovative.
 
-Another use case is to increase the diversity of the generated text, as when working with language generation models, it is common for the model to generate responses that are very similar to one another, even when using different prompts. By increasing the "bestof" parameter, you directly increase the diversity of the result.
+Another use case is to increase the diversity of the generated text, as when working with language generation models, it is common for the model to generate responses that are very similar to one another, even when using different prompts. By increasing the `best_of` parameter, you directly increase the diversity of the result.
 
 ```csharp
 var payload = new Dictionary<string, object>
@@ -113,7 +113,7 @@ var payload = new Dictionary<string, object>
         { "prompt", "Write a short description of a book called Break Dancing With Crocodiles" },
         { "best_of", 1 },
         { "max_tokens", 250 },
-        {"model", "text-davinci-003"}
+        { "model", "text-davinci-003" }
     };
 ```
 
@@ -181,7 +181,7 @@ var payload = new Dictionary<string, object>
 
 Experiment by adjusting the temperature between values of 0.0 and 1.0 to get some interesting and varied results.
 
-Here's some examples of responses ChatGPT has provided:
+Here are some examples of responses ChatGPT has provided:
 
 ### Temperature: 1.0
 
@@ -210,7 +210,7 @@ However, in order to communicate through Discord we'll need to implement some da
 
 Here I'm just using anonymous types and dynamic objects to represent the Discord models, the minimum requirement to get an end to end test going. 
 
-Fo further detail on what each of part of each model represents I recommend you read the documentation, at least in part, around [Application Commands](https://discord.com/developers/docs/interactions/application-commands) (in particular [Slash Commands](https://discord.com/developers/docs/interactions/application-commands#slash-commands) which we'll be using) and [Receiving and Responding to Interactions](https://discord.com/developers/docs/interactions/receiving-and-responding) in our application.
+For further detail on what each of part of each model represents I recommend you read the documentation, at least in part, around [Application Commands](https://discord.com/developers/docs/interactions/application-commands) (in particular [Slash Commands](https://discord.com/developers/docs/interactions/application-commands#slash-commands) which we'll be using) and [Receiving and Responding to Interactions](https://discord.com/developers/docs/interactions/receiving-and-responding) in our application.
 
 Here I just register a new Slash Command with Discord, but there's much more on offer.
 
@@ -240,13 +240,13 @@ Head back over to your Application on [Discord](https://discord.com/developers/a
 At this point you should receive the callback from Discord, and as long as everything worked ok the page will allow the save to happen. 
 
 If you still see the `Save Changes` button on screen then you might just have to wait a few minutes. If it persists, something went wrong.
-You can view the ngrok logs in the Web Interface which, combined with stepping through the debugger, usually helps to resolve any issues. The ngrok Web Interface url will be displayed in the console, it'll look something like:
+You can view the ngrok logs in the Web Interface which, combined with stepping through the debugger, usually helps to resolve any issues. The ngrok Web Interface URL will be displayed in the console, it'll look something like:
 
 ```cmd
 Web Interface      http://127.0.0.1:4040  
 ```
 
-Once the ping from Discord has succeeded it won't ask again, however note that everytime you restart ngrok and get a new Forwaring Url you'll have to repeat the process of registering it on Discord and acknowledging the ping.
+Once the ping from Discord has succeeded it won't ask again, however note that everytime you restart ngrok and get a new Forwaring URL you'll have to repeat the process of registering it on Discord and acknowledging the ping.
 
 
 
@@ -261,8 +261,8 @@ When ChatGPT responds, we then post an update to a Discord webhook, which replac
 
 Go to Discord and try out your Slash Command in the channel you invited your bot to:
 
-![Slash command](./images/DiscordBot1.png "Slash command")
+![Slash command](https://github.com/davetoland/DiscordChatGPT/assets/19878260/90c4ea15-0447-4630-91cf-94143c7f0ce2 "Slash command")
 
-![Bot is thinking](./images/DiscordBot2.png "Bot is thinking")
+![Bot is thinking](https://github.com/davetoland/DiscordChatGPT/assets/19878260/921de8a0-bcdf-4aab-96a4-3087db926480 "Bot is thinking")
 
-![Response from ChatGPT](./images/DiscordBot3.png "Response from ChatGPT")
+![Response from ChatGPT](https://github.com/davetoland/DiscordChatGPT/assets/19878260/c5c54231-c459-4511-9df1-5c6db08bab15 "Response from ChatGPT")
