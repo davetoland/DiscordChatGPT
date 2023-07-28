@@ -1,4 +1,4 @@
 ﻿using DiscordChatGPT;
 
-await new DiscordBot().Run();
-
+using var bot = new DiscordBot();
+await bot.Run();
