@@ -1,4 +1,4 @@
-# Authentication with the ChatGPT servers
+# Authentication with ChatGPT
 Before you can start interacting with ChatGPT, you'll need to authenticate and authorize your API calls.
 
 Get an API key from OpenAI by signing up for an account and creating a new Secret Key in the [API Keys](https://beta.openai.com/account/api-keys) section of the OpenAI dashboard.
