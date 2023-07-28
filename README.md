@@ -138,7 +138,7 @@ var payload = new Dictionary<string, object>
         { "prompt", "Generate 5 sentences about: The C# Language" },
         { "frequency_penalty", 0.5 },
         { "max_tokens", 500 },
-        {"model", "text-davinci-003"}
+        { "model", "text-davinci-003"}
     };
 ```
 
